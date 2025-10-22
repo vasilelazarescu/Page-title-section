@@ -72,8 +72,18 @@ final class Custom_Banner_Widget_Plugin {
      * Perform some compatibility checks to make sure basic requirements are met.
      */
     public function __construct() {
+        // Hook into plugins_loaded to check compatibility after all plugins are loaded
+        add_action('plugins_loaded', [$this, 'on_plugins_loaded'], -1);
+    }
+
+    /**
+     * On Plugins Loaded
+     *
+     * Checks plugin compatibility after all plugins are loaded
+     */
+    public function on_plugins_loaded() {
         if ($this->is_compatible()) {
-            add_action('plugins_loaded', [$this, 'init']);
+            $this->init();
         }
     }
 
@@ -83,6 +93,12 @@ final class Custom_Banner_Widget_Plugin {
      * Checks whether the site meets the plugin requirement.
      */
     public function is_compatible() {
+        // Check for required PHP version first
+        if (version_compare(PHP_VERSION, self::MINIMUM_PHP_VERSION, '<')) {
+            add_action('admin_notices', [$this, 'admin_notice_minimum_php_version']);
+            return false;
+        }
+
         // Check if Elementor installed and activated
         if (!did_action('elementor/loaded')) {
             add_action('admin_notices', [$this, 'admin_notice_missing_main_plugin']);
@@ -92,12 +108,6 @@ final class Custom_Banner_Widget_Plugin {
         // Check for required Elementor version
         if (!version_compare(ELEMENTOR_VERSION, self::MINIMUM_ELEMENTOR_VERSION, '>=')) {
             add_action('admin_notices', [$this, 'admin_notice_minimum_elementor_version']);
-            return false;
-        }
-
-        // Check for required PHP version
-        if (version_compare(PHP_VERSION, self::MINIMUM_PHP_VERSION, '<')) {
-            add_action('admin_notices', [$this, 'admin_notice_minimum_php_version']);
             return false;
         }
 
