@@ -140,10 +140,16 @@ final class Custom_Banner_Widget_Plugin {
      */
     public function register_widgets($widgets_manager) {
         // Include Widget files
-        require_once(__DIR__ . '/widgets/custom-banner-widget/custom-banner-widget.php');
+        $widget_file = __DIR__ . '/widgets/custom-banner-widget/custom-banner-widget.php';
 
-        // Register widget
-        $widgets_manager->register(new \Custom_Banner_Widget());
+        if (file_exists($widget_file)) {
+            require_once($widget_file);
+
+            // Register widget if class exists
+            if (class_exists('Custom_Banner_Widget')) {
+                $widgets_manager->register(new \Custom_Banner_Widget());
+            }
+        }
     }
 
     /**
@@ -183,12 +189,15 @@ final class Custom_Banner_Widget_Plugin {
      * Load widget editor CSS files.
      */
     public function enqueue_editor_styles() {
-        wp_enqueue_style(
-            'custom-banner-widget-editor',
-            plugins_url('/widgets/custom-banner-widget/editor.css', __FILE__),
-            [],
-            self::VERSION
-        );
+        $editor_css_path = plugin_dir_path(__FILE__) . 'widgets/custom-banner-widget/editor.css';
+        if (file_exists($editor_css_path)) {
+            wp_enqueue_style(
+                'custom-banner-widget-editor',
+                plugins_url('/widgets/custom-banner-widget/editor.css', __FILE__),
+                [],
+                self::VERSION
+            );
+        }
     }
 
     /**

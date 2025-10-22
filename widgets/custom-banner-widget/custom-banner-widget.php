@@ -63,7 +63,7 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
     /**
      * Register widget controls
      */
-    protected function register_controls() {
+    protected function _register_controls() {
 
         // ========================================
         // CONTENT TAB
@@ -92,25 +92,17 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
         );
 
         // Featured image status/preview
-        if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-            $featured_image = $this->get_featured_image_url();
-            $status_type = $featured_image ? 'success' : 'warning';
-            $status_message = $featured_image
-                ? esc_html__('Featured image is set for this page', 'custom-banner-widget')
-                : esc_html__('No featured image set. Please set a featured image or use custom upload.', 'custom-banner-widget');
-
-            $this->add_control(
-                'featured_image_status',
-                [
-                    'type' => \Elementor\Controls_Manager::RAW_HTML,
-                    'raw' => '<div class="elementor-control-field-description">' . $status_message . '</div>',
-                    'content_classes' => 'elementor-panel-alert elementor-panel-alert-' . $status_type,
-                    'condition' => [
-                        'image_source' => 'featured',
-                    ],
-                ]
-            );
-        }
+        $this->add_control(
+            'featured_image_status',
+            [
+                'type' => \Elementor\Controls_Manager::RAW_HTML,
+                'raw' => esc_html__('Using page featured image. Set a featured image in the page settings, or select Custom Upload to choose a different image.', 'custom-banner-widget'),
+                'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+                'condition' => [
+                    'image_source' => 'featured',
+                ],
+            ]
+        );
 
         $this->add_control(
             'custom_image',
@@ -1018,7 +1010,7 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
     /**
      * Render widget output in the editor
      */
-    protected function content_template() {
+    protected function _content_template() {
         ?>
         <#
         var backgroundUrl = '';
