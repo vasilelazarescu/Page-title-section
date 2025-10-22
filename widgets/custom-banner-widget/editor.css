@@ -1,0 +1,414 @@
+/**
+ * Custom Banner Widget - Editor Styles
+ * Styles specifically for the Elementor editor interface
+ * Version: 1.0.0
+ */
+
+/* ========================================
+   Editor Panel Styles
+   ======================================== */
+
+/* Featured Image Status Alert */
+.elementor-control-featured_image_status .elementor-control-field-description {
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.elementor-control-featured_image_status .elementor-panel-alert-success {
+    background-color: #d4edda;
+    border-left: 3px solid #28a745;
+    color: #155724;
+}
+
+.elementor-control-featured_image_status .elementor-panel-alert-warning {
+    background-color: #fff3cd;
+    border-left: 3px solid #ffc107;
+    color: #856404;
+}
+
+.elementor-control-featured_image_status .elementor-panel-alert-info {
+    background-color: #d1ecf1;
+    border-left: 3px solid #17a2b8;
+    color: #0c5460;
+}
+
+/* ========================================
+   Editor Preview Enhancements
+   ======================================== */
+
+/* Better visibility for preview in editor */
+.elementor-editor-active .custom-banner-widget {
+    position: relative;
+}
+
+.elementor-editor-active .banner-background {
+    min-height: 400px;
+    border: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.elementor-editor-active .banner-background:empty::before {
+    content: "Banner Background Area";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    pointer-events: none;
+}
+
+/* Highlight content area in editor */
+.elementor-editor-active .banner-content-wrapper {
+    outline: 1px dashed rgba(147, 97, 255, 0.3);
+    outline-offset: -10px;
+}
+
+.elementor-editor-active .banner-content {
+    pointer-events: none;
+    position: relative;
+}
+
+.elementor-editor-active .banner-content * {
+    pointer-events: auto;
+}
+
+/* ========================================
+   Control Section Headers
+   ======================================== */
+
+/* Make section headers more prominent */
+.elementor-control-section_background_image .elementor-panel-heading-title::before,
+.elementor-control-section_overlay .elementor-panel-heading-title::before,
+.elementor-control-section_breadcrumb .elementor-panel-heading-title::before,
+.elementor-control-section_title .elementor-panel-heading-title::before,
+.elementor-control-section_subtitle .elementor-panel-heading-title::before {
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+.elementor-control-section_background_image .elementor-panel-heading-title::before {
+    content: "\e90c"; /* Elementor image icon */
+}
+
+.elementor-control-section_breadcrumb .elementor-panel-heading-title::before {
+    content: "\e87a"; /* Elementor breadcrumb-like icon */
+}
+
+.elementor-control-section_title .elementor-panel-heading-title::before {
+    content: "\e87f"; /* Elementor heading icon */
+}
+
+.elementor-control-section_subtitle .elementor-panel-heading-title::before {
+    content: "\e87f"; /* Elementor heading icon */
+}
+
+/* ========================================
+   Image Source Toggle Enhancement
+   ======================================== */
+
+.elementor-control-image_source {
+    margin-bottom: 15px;
+}
+
+.elementor-control-image_source .elementor-control-input-wrapper select {
+    font-weight: 500;
+}
+
+/* Highlight when featured image is selected */
+.elementor-control-image_source select option[value="featured"] {
+    font-weight: bold;
+}
+
+/* ========================================
+   Custom Image Control Enhancement
+   ======================================== */
+
+.elementor-control-custom_image {
+    padding-top: 10px;
+    border-top: 1px solid #e6e9ec;
+}
+
+.elementor-control-fallback_image {
+    padding-top: 10px;
+    border-top: 1px solid #e6e9ec;
+}
+
+/* ========================================
+   Separator Styling
+   ======================================== */
+
+.elementor-control-type-divider {
+    margin: 15px 0;
+}
+
+/* ========================================
+   Typography Controls
+   ======================================== */
+
+/* Group typography controls visually */
+.elementor-group-control-typography {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+/* ========================================
+   Color Controls Enhancement
+   ======================================== */
+
+.elementor-control-overlay_color,
+.elementor-control-breadcrumb_color,
+.elementor-control-breadcrumb_hover_color,
+.elementor-control-title_color,
+.elementor-control-title_hover_color,
+.elementor-control-subtitle_color {
+    position: relative;
+}
+
+/* Add visual separator before color controls */
+.elementor-control-overlay_color::before,
+.elementor-control-breadcrumb_color::before,
+.elementor-control-title_color::before,
+.elementor-control-subtitle_color::before {
+    content: "";
+    display: block;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e6e9ec 20%, #e6e9ec 80%, transparent);
+    margin: 10px 0;
+}
+
+/* ========================================
+   Dimension Controls
+   ======================================== */
+
+/* Make dimension controls more compact */
+.elementor-control-dimensions .elementor-control-dimension input {
+    font-size: 11px;
+}
+
+/* ========================================
+   Slider Controls
+   ======================================== */
+
+.elementor-control-container_min_height .elementor-control-input-wrapper,
+.elementor-control-content_max_width .elementor-control-input-wrapper,
+.elementor-control-breadcrumb_spacing .elementor-control-input-wrapper {
+    margin-bottom: 5px;
+}
+
+/* ========================================
+   Switcher Controls
+   ======================================== */
+
+.elementor-control-show_breadcrumb .elementor-control-title,
+.elementor-control-show_subtitle .elementor-control-title,
+.elementor-control-title_auto_pull .elementor-control-title {
+    font-weight: 500;
+}
+
+/* Highlight active switchers */
+.elementor-control-type-switcher .elementor-switch-input:checked ~ .elementor-switch-label {
+    background-color: #9361ff;
+}
+
+/* ========================================
+   Select Controls
+   ======================================== */
+
+.elementor-control-type-select select {
+    padding-right: 30px;
+}
+
+/* Style select dropdowns */
+.elementor-control-background_size select,
+.elementor-control-background_position select,
+.elementor-control-background_repeat select,
+.elementor-control-background_attachment select,
+.elementor-control-overlay_blend_mode select {
+    background-color: #f9f9f9;
+}
+
+/* ========================================
+   Text Area Controls
+   ======================================== */
+
+.elementor-control-subtitle_text textarea {
+    min-height: 80px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* ========================================
+   Responsive Mode Indicators
+   ======================================== */
+
+/* Highlight responsive controls */
+.elementor-control-responsive-desktop::before,
+.elementor-control-responsive-tablet::before,
+.elementor-control-responsive-mobile::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+}
+
+.elementor-control-responsive-desktop::before {
+    background-color: #3498db;
+}
+
+.elementor-control-responsive-tablet::before {
+    background-color: #e67e22;
+}
+
+.elementor-control-responsive-mobile::before {
+    background-color: #e74c3c;
+}
+
+/* ========================================
+   Help Tips Enhancement
+   ======================================== */
+
+.elementor-control-field-description {
+    font-size: 11px;
+    font-style: italic;
+    color: #6c757d;
+    line-height: 1.4;
+    margin-top: 5px;
+}
+
+/* ========================================
+   Widget Icon in Panel
+   ======================================== */
+
+.elementor-element-edit-mode .custom-banner-widget {
+    position: relative;
+}
+
+.elementor-element-edit-mode .custom-banner-widget::before {
+    content: "\e90c"; /* Elementor featured image icon */
+    font-family: eicons;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: rgba(147, 97, 255, 0.5);
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* ========================================
+   Preview Mode Adjustments
+   ======================================== */
+
+/* Show better preview of overlay in editor */
+.elementor-editor-active .banner-overlay {
+    opacity: 0.8;
+}
+
+/* Preview text contrast */
+.elementor-editor-active .banner-title,
+.elementor-editor-active .banner-subtitle,
+.elementor-editor-active .banner-breadcrumb {
+    position: relative;
+    z-index: 10;
+}
+
+/* ========================================
+   Dark Mode Support for Editor
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    .elementor-control-featured_image_status .elementor-panel-alert-success {
+        background-color: #1e4620;
+        color: #8fd99f;
+    }
+
+    .elementor-control-featured_image_status .elementor-panel-alert-warning {
+        background-color: #4d3800;
+        color: #ffd966;
+    }
+
+    .elementor-group-control-typography {
+        background-color: #2a2a2a;
+    }
+
+    .elementor-control-background_size select,
+    .elementor-control-background_position select,
+    .elementor-control-background_repeat select,
+    .elementor-control-background_attachment select,
+    .elementor-control-overlay_blend_mode select {
+        background-color: #2a2a2a;
+        color: #fff;
+    }
+}
+
+/* ========================================
+   Loading States
+   ======================================== */
+
+.elementor-loading .custom-banner-widget {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ========================================
+   Drag and Drop Indicators
+   ======================================== */
+
+.elementor-widget-custom-banner-widget.elementor-element-edit-mode {
+    cursor: move;
+}
+
+.elementor-widget-custom-banner-widget.elementor-element-editable {
+    outline: 1px dashed #9361ff;
+    outline-offset: 5px;
+}
+
+/* ========================================
+   Panel Optimization
+   ======================================== */
+
+/* Compact mode for controls when panel is narrow */
+@media (max-width: 1440px) {
+    .elementor-control-field-description {
+        font-size: 10px;
+    }
+
+    .elementor-group-control-typography {
+        padding: 8px;
+    }
+}
+
+/* ========================================
+   Accessibility in Editor
+   ======================================== */
+
+.elementor-control:focus-within {
+    background-color: rgba(147, 97, 255, 0.05);
+    border-radius: 3px;
+}
+
+/* ========================================
+   Custom Scrollbar for Editor
+   ======================================== */
+
+.elementor-panel .elementor-panel-content-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.elementor-panel .elementor-panel-content-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.elementor-panel .elementor-panel-content-wrapper::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.elementor-panel .elementor-panel-content-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #9361ff;
+}

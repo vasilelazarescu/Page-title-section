@@ -1,0 +1,83 @@
+# WordPress Core Files
+/wp-admin/
+/wp-includes/
+/wp-content/uploads/
+/wp-content/upgrade/
+/wp-content/cache/
+
+# WordPress Config
+wp-config.php
+wp-config-local.php
+
+# Log Files
+*.log
+error_log
+debug.log
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor Files
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup Files
+*.bak
+*.backup
+*.old
+*.orig
+
+# Temporary Files
+*.tmp
+*.temp
+
+# Node Modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Composer
+/vendor/
+composer.phar
+
+# Package Files
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# Environment Files
+.env
+.env.local
+.env.*.local
+
+# Database Files
+*.sql
+*.sqlite
+
+# Cache Files
+.cache/
+*.cache
+
+# Build Files
+/build/
+/dist/
+
+# PHP CS Fixer
+.php_cs.cache
+
+# PHPUnit
+/phpunit.xml
+.phpunit.result.cache

@@ -1,0 +1,418 @@
+/**
+ * Custom Banner Widget Styles
+ * Version: 1.0.0
+ */
+
+/* ========================================
+   Base Styles
+   ======================================== */
+
+.custom-banner-widget {
+    position: relative;
+    width: 100%;
+    margin: 0;
+}
+
+.banner-background {
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    overflow: hidden;
+}
+
+/* Overlay Layer */
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ========================================
+   Content Wrapper and Positioning
+   ======================================== */
+
+.banner-content-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    /* Default centering */
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-content {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+}
+
+/* ========================================
+   Breadcrumb Styles
+   ======================================== */
+
+.banner-breadcrumb {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.banner-breadcrumb a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.banner-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.banner-breadcrumb .separator {
+    display: inline-block;
+    margin: 0 5px;
+    opacity: 0.7;
+}
+
+.banner-breadcrumb .current {
+    font-weight: 600;
+}
+
+/* ========================================
+   Title Styles
+   ======================================== */
+
+.banner-title {
+    margin: 0;
+    padding: 0;
+    font-size: 48px;
+    line-height: 1.2;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+/* ========================================
+   Subtitle Styles
+   ======================================== */
+
+.banner-subtitle {
+    margin: 15px 0 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+/* Tablet (Portrait and Landscape) */
+@media screen and (max-width: 1024px) {
+    .banner-title {
+        font-size: 36px;
+    }
+
+    .banner-subtitle {
+        font-size: 16px;
+    }
+
+    .banner-breadcrumb {
+        font-size: 13px;
+    }
+}
+
+/* Mobile (Portrait and Landscape) */
+@media screen and (max-width: 768px) {
+    .banner-title {
+        font-size: 28px;
+    }
+
+    .banner-subtitle {
+        font-size: 14px;
+    }
+
+    .banner-breadcrumb {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .banner-breadcrumb .separator {
+        margin: 0 3px;
+    }
+}
+
+/* Small Mobile */
+@media screen and (max-width: 480px) {
+    .banner-title {
+        font-size: 24px;
+    }
+
+    .banner-subtitle {
+        font-size: 13px;
+        margin-top: 10px;
+    }
+}
+
+/* ========================================
+   RTL Support
+   ======================================== */
+
+[dir="rtl"] .banner-breadcrumb .separator {
+    transform: scaleX(-1);
+}
+
+/* ========================================
+   Accessibility
+   ======================================== */
+
+.banner-breadcrumb a:focus,
+.banner-title:focus,
+.banner-subtitle:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .banner-overlay {
+        opacity: 0.8 !important;
+    }
+
+    .banner-title,
+    .banner-subtitle,
+    .banner-breadcrumb {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .banner-breadcrumb a,
+    .banner-title {
+        transition: none;
+    }
+
+    .banner-background {
+        background-attachment: scroll !important;
+    }
+}
+
+/* ========================================
+   Performance Optimizations
+   ======================================== */
+
+/* GPU acceleration for overlay */
+.banner-overlay {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Smooth rendering */
+.banner-background {
+    transform: translateZ(0);
+    will-change: background-position;
+}
+
+/* ========================================
+   Browser Compatibility
+   ======================================== */
+
+/* Flexbox fallbacks */
+.banner-content-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+/* Background size fallback */
+.banner-background {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/* ========================================
+   Loading and Empty States
+   ======================================== */
+
+.banner-background:not([style*="background-image"]) {
+    background-color: #f0f0f0;
+}
+
+.banner-background:not([style*="background-image"])::before {
+    content: "";
+    display: block;
+    padding-bottom: 40%;
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+
+@media print {
+    .banner-background {
+        background-attachment: scroll !important;
+        page-break-inside: avoid;
+    }
+
+    .banner-overlay {
+        opacity: 0.3 !important;
+    }
+
+    .banner-breadcrumb a {
+        text-decoration: underline;
+    }
+}
+
+/* ========================================
+   Dark Mode Support
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    .banner-background:not([style*="background-image"]) {
+        background-color: #1a1a1a;
+    }
+}
+
+/* ========================================
+   Animation Support (Optional)
+   ======================================== */
+
+/* Fade in animation for content */
+@keyframes bannerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.banner-content.animate-in {
+    animation: bannerFadeIn 0.6s ease-out forwards;
+}
+
+/* Parallax optimization */
+.banner-background[style*="background-attachment: fixed"] {
+    background-attachment: fixed;
+}
+
+@media screen and (max-width: 768px) {
+    /* Disable parallax on mobile for performance */
+    .banner-background[style*="background-attachment: fixed"] {
+        background-attachment: scroll !important;
+    }
+}
+
+/* ========================================
+   Image Filters Support
+   ======================================== */
+
+.banner-background.filter-blur {
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+}
+
+.banner-background.filter-grayscale {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+}
+
+.banner-background.filter-sepia {
+    filter: sepia(100%);
+    -webkit-filter: sepia(100%);
+}
+
+.banner-background.filter-brightness {
+    filter: brightness(1.2);
+    -webkit-filter: brightness(1.2);
+}
+
+.banner-background.filter-contrast {
+    filter: contrast(1.2);
+    -webkit-filter: contrast(1.2);
+}
+
+/* ========================================
+   Content Box Variants
+   ======================================== */
+
+.banner-content.has-background {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* ========================================
+   Z-Index Management
+   ======================================== */
+
+/*
+ * Z-index hierarchy:
+ * 1. banner-background (base layer)
+ * 2. banner-overlay (z-index: 1)
+ * 3. banner-content-wrapper (z-index: 2)
+ * 4. banner-content (z-index: 3)
+ */
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+.banner-content--left {
+    text-align: left;
+}
+
+.banner-content--center {
+    text-align: center;
+}
+
+.banner-content--right {
+    text-align: right;
+}
+
+/* ========================================
+   Editor-specific Styles
+   ======================================== */
+
+.elementor-editor-active .banner-background {
+    min-height: 400px;
+}
+
+.elementor-editor-active .banner-content {
+    pointer-events: none;
+}
+
+.elementor-editor-active .banner-content * {
+    pointer-events: auto;
+}
