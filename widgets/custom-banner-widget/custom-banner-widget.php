@@ -455,6 +455,115 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
 
         $this->end_controls_section();
 
+        // CTA Button Section
+        $this->start_controls_section(
+            'section_cta_button',
+            [
+                'label' => esc_html__('CTA Button', 'custom-banner-widget'),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'show_button',
+            [
+                'label' => esc_html__('Show Button', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Show', 'custom-banner-widget'),
+                'label_off' => esc_html__('Hide', 'custom-banner-widget'),
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
+
+        $this->add_control(
+            'button_text',
+            [
+                'label' => esc_html__('Button Text', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => esc_html__('Learn More', 'custom-banner-widget'),
+                'placeholder' => esc_html__('Enter button text', 'custom-banner-widget'),
+                'condition' => [
+                    'show_button' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'button_link',
+            [
+                'label' => esc_html__('Link', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::URL,
+                'placeholder' => esc_html__('https://your-link.com', 'custom-banner-widget'),
+                'default' => [
+                    'url' => '#',
+                    'is_external' => false,
+                    'nofollow' => false,
+                ],
+                'condition' => [
+                    'show_button' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'button_icon',
+            [
+                'label' => esc_html__('Icon', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::ICONS,
+                'default' => [
+                    'value' => 'fas fa-arrow-right',
+                    'library' => 'fa-solid',
+                ],
+                'condition' => [
+                    'show_button' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'button_icon_position',
+            [
+                'label' => esc_html__('Icon Position', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'after',
+                'options' => [
+                    'before' => esc_html__('Before', 'custom-banner-widget'),
+                    'after' => esc_html__('After', 'custom-banner-widget'),
+                ],
+                'condition' => [
+                    'show_button' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'button_spacing',
+            [
+                'label' => esc_html__('Top Spacing', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 20,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .banner-button' => 'margin-top: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'show_button' => 'yes',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
         // ========================================
         // STYLE TAB
         // ========================================
@@ -689,6 +798,28 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'banner_border_radius_heading',
+            [
+                'label' => esc_html__('Banner Container', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'banner_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .custom-banner-widget' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+                    '{{WRAPPER}} .banner-background' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->end_controls_section();
 
         // Breadcrumb Style Section
@@ -888,10 +1019,216 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
+
+        // Button Style Section
+        $this->start_controls_section(
+            'section_button_style',
+            [
+                'label' => esc_html__('Button Style', 'custom-banner-widget'),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'show_button' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'button_typography',
+                'label' => esc_html__('Typography', 'custom-banner-widget'),
+                'selector' => '{{WRAPPER}} .banner-button',
+            ]
+        );
+
+        $this->start_controls_tabs('button_style_tabs');
+
+        // Normal state
+        $this->start_controls_tab(
+            'button_normal',
+            [
+                'label' => esc_html__('Normal', 'custom-banner-widget'),
+            ]
+        );
+
+        $this->add_control(
+            'button_text_color',
+            [
+                'label' => esc_html__('Text Color', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#ffffff',
+                'selectors' => [
+                    '{{WRAPPER}} .banner-button' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'button_background',
+                'label' => esc_html__('Background', 'custom-banner-widget'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .banner-button',
+                'fields_options' => [
+                    'background' => [
+                        'default' => 'classic',
+                    ],
+                    'color' => [
+                        'default' => '#0073e6',
+                    ],
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'button_border',
+                'label' => esc_html__('Border', 'custom-banner-widget'),
+                'selector' => '{{WRAPPER}} .banner-button',
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'button_box_shadow',
+                'label' => esc_html__('Box Shadow', 'custom-banner-widget'),
+                'selector' => '{{WRAPPER}} .banner-button',
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        // Hover state
+        $this->start_controls_tab(
+            'button_hover',
+            [
+                'label' => esc_html__('Hover', 'custom-banner-widget'),
+            ]
+        );
+
+        $this->add_control(
+            'button_text_color_hover',
+            [
+                'label' => esc_html__('Text Color', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .banner-button:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'button_background_hover',
+                'label' => esc_html__('Background', 'custom-banner-widget'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .banner-button:hover',
+            ]
+        );
+
+        $this->add_control(
+            'button_border_color_hover',
+            [
+                'label' => esc_html__('Border Color', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .banner-button:hover' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'button_box_shadow_hover',
+                'label' => esc_html__('Box Shadow', 'custom-banner-widget'),
+                'selector' => '{{WRAPPER}} .banner-button:hover',
+            ]
+        );
+
+        $this->add_control(
+            'button_hover_animation',
+            [
+                'label' => esc_html__('Hover Animation', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::HOVER_ANIMATION,
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->add_responsive_control(
+            'button_padding',
+            [
+                'label' => esc_html__('Padding', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'separator' => 'before',
+                'default' => [
+                    'top' => 12,
+                    'right' => 24,
+                    'bottom' => 12,
+                    'left' => 24,
+                    'unit' => 'px',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .banner-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'button_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'default' => [
+                    'top' => 4,
+                    'right' => 4,
+                    'bottom' => 4,
+                    'left' => 4,
+                    'unit' => 'px',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .banner-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'button_icon_spacing',
+            [
+                'label' => esc_html__('Icon Spacing', 'custom-banner-widget'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 50,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 8,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .banner-button .button-icon-before' => 'margin-right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .banner-button .button-icon-after' => 'margin-left: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     /**
-     * Generate breadcrumb HTML
+     * Generate breadcrumb HTML with proper taxonomy support
      */
     private function get_breadcrumb_html($settings) {
         if ($settings['breadcrumb_type'] === 'custom') {
@@ -906,17 +1243,74 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
         // Home link
         $breadcrumb[] = '<a href="' . esc_url(home_url('/')) . '">' . esc_html($home_text) . '</a>';
 
-        // Get current page/post
+        // Handle different page types
         if (is_singular()) {
             $post = get_post();
 
-            // Add parent pages for hierarchical post types
+            // Add post type archive for non-page post types
+            if ($post->post_type !== 'page' && $post->post_type !== 'post') {
+                $post_type_object = get_post_type_object($post->post_type);
+                if ($post_type_object && $post_type_object->has_archive) {
+                    $breadcrumb[] = '<a href="' . esc_url(get_post_type_archive_link($post->post_type)) . '">' . esc_html($post_type_object->labels->name) . '</a>';
+                }
+            }
+
+            // Add taxonomy terms (categories, tags, custom taxonomies)
+            $taxonomies = get_object_taxonomies($post->post_type, 'objects');
+            $primary_taxonomy = null;
+
+            // Find the primary taxonomy (category for posts, or first hierarchical taxonomy)
+            foreach ($taxonomies as $taxonomy) {
+                if (!$taxonomy->public || !$taxonomy->publicly_queryable) {
+                    continue;
+                }
+
+                // Prefer 'category' for posts
+                if ($post->post_type === 'post' && $taxonomy->name === 'category') {
+                    $primary_taxonomy = $taxonomy;
+                    break;
+                }
+
+                // Otherwise use first hierarchical taxonomy
+                if (!$primary_taxonomy && $taxonomy->hierarchical) {
+                    $primary_taxonomy = $taxonomy;
+                }
+            }
+
+            // Add taxonomy hierarchy
+            if ($primary_taxonomy) {
+                $terms = get_the_terms($post->ID, $primary_taxonomy->name);
+                if ($terms && !is_wp_error($terms)) {
+                    // Get the most specific term (last in hierarchy)
+                    $term = array_shift($terms);
+
+                    // Build hierarchy of parent terms
+                    $term_hierarchy = [];
+                    while ($term) {
+                        $term_hierarchy[] = $term;
+                        $term = get_term($term->parent, $primary_taxonomy->name);
+                        if (is_wp_error($term)) {
+                            break;
+                        }
+                    }
+
+                    // Add terms in correct order (parent to child)
+                    foreach (array_reverse($term_hierarchy) as $ancestor_term) {
+                        $breadcrumb[] = '<a href="' . esc_url(get_term_link($ancestor_term)) . '">' . esc_html($ancestor_term->name) . '</a>';
+                    }
+                }
+            }
+
+            // Add parent pages for hierarchical post types (like pages)
             if ($post->post_parent) {
                 $parent_id = $post->post_parent;
                 $parents = [];
 
                 while ($parent_id) {
                     $page = get_post($parent_id);
+                    if (!$page) {
+                        break;
+                    }
                     $parents[] = '<a href="' . esc_url(get_permalink($page->ID)) . '">' . esc_html(get_the_title($page->ID)) . '</a>';
                     $parent_id = $page->post_parent;
                 }
@@ -924,31 +1318,53 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
                 $breadcrumb = array_merge($breadcrumb, array_reverse($parents));
             }
 
-            // Add post type archive for non-page post types
-            if ($post->post_type !== 'page') {
-                $post_type_object = get_post_type_object($post->post_type);
-                if ($post_type_object && $post_type_object->has_archive) {
-                    $breadcrumb[] = '<a href="' . esc_url(get_post_type_archive_link($post->post_type)) . '">' . esc_html($post_type_object->labels->name) . '</a>';
-                }
-
-                // Add categories for posts
-                if ($post->post_type === 'post') {
-                    $categories = get_the_category($post->ID);
-                    if (!empty($categories)) {
-                        $category = $categories[0];
-                        $breadcrumb[] = '<a href="' . esc_url(get_category_link($category->term_id)) . '">' . esc_html($category->name) . '</a>';
-                    }
-                }
-            }
-
             // Current page/post
             $breadcrumb[] = '<span class="current">' . esc_html(get_the_title()) . '</span>';
-        } elseif (is_archive()) {
-            $breadcrumb[] = '<span class="current">' . esc_html(get_the_archive_title()) . '</span>';
+
+        } elseif (is_tax() || is_category() || is_tag()) {
+            // Taxonomy archive pages
+            $term = get_queried_object();
+
+            if ($term) {
+                // Add parent terms
+                if ($term->parent) {
+                    $parent_term = get_term($term->parent, $term->taxonomy);
+                    $parent_hierarchy = [];
+
+                    while ($parent_term && !is_wp_error($parent_term)) {
+                        $parent_hierarchy[] = $parent_term;
+                        $parent_term = $parent_term->parent ? get_term($parent_term->parent, $term->taxonomy) : null;
+                    }
+
+                    foreach (array_reverse($parent_hierarchy) as $ancestor) {
+                        $breadcrumb[] = '<a href="' . esc_url(get_term_link($ancestor)) . '">' . esc_html($ancestor->name) . '</a>';
+                    }
+                }
+
+                $breadcrumb[] = '<span class="current">' . esc_html($term->name) . '</span>';
+            }
+
+        } elseif (is_post_type_archive()) {
+            // Post type archive
+            $post_type = get_query_var('post_type');
+            if (is_array($post_type)) {
+                $post_type = reset($post_type);
+            }
+            $post_type_object = get_post_type_object($post_type);
+
+            if ($post_type_object) {
+                $breadcrumb[] = '<span class="current">' . esc_html($post_type_object->labels->name) . '</span>';
+            }
+
         } elseif (is_search()) {
             $breadcrumb[] = '<span class="current">' . esc_html__('Search Results', 'custom-banner-widget') . '</span>';
+
         } elseif (is_404()) {
             $breadcrumb[] = '<span class="current">' . esc_html__('404 Not Found', 'custom-banner-widget') . '</span>';
+
+        } elseif (is_home() && !is_front_page()) {
+            // Blog page
+            $breadcrumb[] = '<span class="current">' . esc_html__('Blog', 'custom-banner-widget') . '</span>';
         }
 
         return implode($separator, $breadcrumb);
@@ -999,6 +1415,29 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
                             <<?php echo esc_attr($settings['subtitle_tag']); ?> class="banner-subtitle">
                                 <?php echo wp_kses_post($settings['subtitle_text']); ?>
                             </<?php echo esc_attr($settings['subtitle_tag']); ?>>
+                        <?php endif; ?>
+
+                        <?php if ($settings['show_button'] === 'yes' && !empty($settings['button_text'])) :
+                            $button_link = $settings['button_link'];
+                            $target = $button_link['is_external'] ? ' target="_blank"' : '';
+                            $nofollow = $button_link['nofollow'] ? ' rel="nofollow"' : '';
+                            $animation_class = !empty($settings['button_hover_animation']) ? ' elementor-animation-' . esc_attr($settings['button_hover_animation']) : '';
+                        ?>
+                            <div class="banner-button-wrapper">
+                                <a href="<?php echo esc_url($button_link['url']); ?>" class="banner-button<?php echo $animation_class; ?>"<?php echo $target . $nofollow; ?>>
+                                    <?php if (!empty($settings['button_icon']['value']) && $settings['button_icon_position'] === 'before') : ?>
+                                        <span class="button-icon button-icon-before">
+                                            <?php \Elementor\Icons_Manager::render_icon($settings['button_icon'], ['aria-hidden' => 'true']); ?>
+                                        </span>
+                                    <?php endif; ?>
+                                    <span class="button-text"><?php echo esc_html($settings['button_text']); ?></span>
+                                    <?php if (!empty($settings['button_icon']['value']) && $settings['button_icon_position'] === 'after') : ?>
+                                        <span class="button-icon button-icon-after">
+                                            <?php \Elementor\Icons_Manager::render_icon($settings['button_icon'], ['aria-hidden' => 'true']); ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </a>
+                            </div>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -1051,6 +1490,36 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
                             <{{{ settings.subtitle_tag }}} class="banner-subtitle">
                                 {{{ settings.subtitle_text }}}
                             </{{{ settings.subtitle_tag }}}>
+                        <# } #>
+
+                        <# if (settings.show_button === 'yes' && settings.button_text) {
+                            var target = settings.button_link.is_external ? ' target="_blank"' : '';
+                            var nofollow = settings.button_link.nofollow ? ' rel="nofollow"' : '';
+                            var animationClass = settings.button_hover_animation ? ' elementor-animation-' + settings.button_hover_animation : '';
+                        #>
+                            <div class="banner-button-wrapper">
+                                <a href="{{{ settings.button_link.url }}}" class="banner-button{{{ animationClass }}}" {{{ target }}} {{{ nofollow }}}>
+                                    <# if (settings.button_icon && settings.button_icon.value && settings.button_icon_position === 'before') { #>
+                                        <span class="button-icon button-icon-before">
+                                            <# if (settings.button_icon.library === 'svg') { #>
+                                                {{{ settings.button_icon.value.url }}}
+                                            <# } else { #>
+                                                <i class="{{{ settings.button_icon.value }}}"></i>
+                                            <# } #>
+                                        </span>
+                                    <# } #>
+                                    <span class="button-text">{{{ settings.button_text }}}</span>
+                                    <# if (settings.button_icon && settings.button_icon.value && settings.button_icon_position === 'after') { #>
+                                        <span class="button-icon button-icon-after">
+                                            <# if (settings.button_icon.library === 'svg') { #>
+                                                {{{ settings.button_icon.value.url }}}
+                                            <# } else { #>
+                                                <i class="{{{ settings.button_icon.value }}}"></i>
+                                            <# } #>
+                                        </span>
+                                    <# } #>
+                                </a>
+                            </div>
                         <# } #>
                     </div>
                 </div>

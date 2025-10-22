@@ -113,6 +113,71 @@
 }
 
 /* ========================================
+   CTA Button Styles
+   ======================================== */
+
+.banner-button-wrapper {
+    margin-top: 20px;
+}
+
+.banner-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #0073e6;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-button:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.banner-button:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.banner-button .button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.banner-button .button-icon-before {
+    margin-right: 8px;
+}
+
+.banner-button .button-icon-after {
+    margin-left: 8px;
+}
+
+.banner-button:hover .button-icon-after {
+    transform: translateX(4px);
+}
+
+.banner-button:hover .button-icon-before {
+    transform: translateX(-4px);
+}
+
+.banner-button .button-text {
+    display: inline-block;
+}
+
+/* ========================================
    Responsive Design
    ======================================== */
 
@@ -128,6 +193,11 @@
 
     .banner-breadcrumb {
         font-size: 13px;
+    }
+
+    .banner-button {
+        font-size: 15px;
+        padding: 11px 22px;
     }
 }
 
@@ -149,6 +219,15 @@
     .banner-breadcrumb .separator {
         margin: 0 3px;
     }
+
+    .banner-button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    .banner-button-wrapper {
+        margin-top: 15px;
+    }
 }
 
 /* Small Mobile */
@@ -160,6 +239,13 @@
     .banner-subtitle {
         font-size: 13px;
         margin-top: 10px;
+    }
+
+    .banner-button {
+        font-size: 13px;
+        padding: 9px 18px;
+        width: 100%;
+        max-width: 300px;
     }
 }
 
