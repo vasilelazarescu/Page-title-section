@@ -367,7 +367,7 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
                 'label_on' => esc_html__('Yes', 'custom-banner-widget'),
                 'label_off' => esc_html__('No', 'custom-banner-widget'),
                 'return_value' => 'yes',
-                'default' => 'no',
+                'default' => 'yes',
                 'description' => esc_html__('Override above text with current page/post title', 'custom-banner-widget'),
             ]
         );
@@ -1246,14 +1246,6 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
         // Handle different page types
         if (is_singular()) {
             $post = get_post();
-
-            // Add post type archive for non-page post types
-            if ($post->post_type !== 'page' && $post->post_type !== 'post') {
-                $post_type_object = get_post_type_object($post->post_type);
-                if ($post_type_object && $post_type_object->has_archive) {
-                    $breadcrumb[] = '<a href="' . esc_url(get_post_type_archive_link($post->post_type)) . '">' . esc_html($post_type_object->labels->name) . '</a>';
-                }
-            }
 
             // Add taxonomy terms (categories, tags, custom taxonomies)
             $taxonomies = get_object_taxonomies($post->post_type, 'objects');
