@@ -1318,8 +1318,7 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
                 $breadcrumb = array_merge($breadcrumb, array_reverse($parents));
             }
 
-            // Current page/post
-            $breadcrumb[] = '<span class="current">' . esc_html(get_the_title()) . '</span>';
+            // Note: Current page/post title is not added to avoid duplication with banner title
 
         } elseif (is_tax() || is_category() || is_tag()) {
             // Taxonomy archive pages
@@ -1341,30 +1340,20 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
                     }
                 }
 
-                $breadcrumb[] = '<span class="current">' . esc_html($term->name) . '</span>';
+                // Note: Current term is not added to avoid duplication with banner title
             }
 
         } elseif (is_post_type_archive()) {
-            // Post type archive
-            $post_type = get_query_var('post_type');
-            if (is_array($post_type)) {
-                $post_type = reset($post_type);
-            }
-            $post_type_object = get_post_type_object($post_type);
-
-            if ($post_type_object) {
-                $breadcrumb[] = '<span class="current">' . esc_html($post_type_object->labels->name) . '</span>';
-            }
+            // Post type archive - no current item added to avoid duplication with banner title
 
         } elseif (is_search()) {
-            $breadcrumb[] = '<span class="current">' . esc_html__('Search Results', 'custom-banner-widget') . '</span>';
+            // Search results - no current item added to avoid duplication with banner title
 
         } elseif (is_404()) {
-            $breadcrumb[] = '<span class="current">' . esc_html__('404 Not Found', 'custom-banner-widget') . '</span>';
+            // 404 page - no current item added to avoid duplication with banner title
 
         } elseif (is_home() && !is_front_page()) {
-            // Blog page
-            $breadcrumb[] = '<span class="current">' . esc_html__('Blog', 'custom-banner-widget') . '</span>';
+            // Blog page - no current item added to avoid duplication with banner title
         }
 
         return implode($separator, $breadcrumb);
@@ -1477,7 +1466,7 @@ class Custom_Banner_Widget extends \Elementor\Widget_Base {
                                 <# } else { #>
                                     <a href="#">{{{ settings.breadcrumb_home_text }}}</a>
                                     <span class="separator">{{{ settings.breadcrumb_separator }}}</span>
-                                    <span class="current">Current Page</span>
+                                    <a href="#">Parent Page</a>
                                 <# } #>
                             </nav>
                         <# } #>
